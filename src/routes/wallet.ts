@@ -1,7 +1,11 @@
 import express from "express";
-import { fundWallet } from "../controllers/wallet";
+import { requireAuth } from "../middldewares/require-auth";
+import { fundTransfer, fundWallet, getWalletDetails } from "../controllers/wallet";
 
 const router = express.Router();
-router.post('/fund-wallet', fundWallet);
+
+router.get('/user/:userId', requireAuth, getWalletDetails);
+router.post('/fund-wallet', requireAuth, fundWallet);
+router.post('/fund-transfer', requireAuth, fundTransfer);
 
 export default router;

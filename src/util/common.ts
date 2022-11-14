@@ -17,6 +17,7 @@ export const sendSuccess = ({ response, data = {}, message = "Request successful
 }
 
 export const sendError = ({ response, errors = {}, message = "Invalid requests", code = HttpStatusCode.INVALID_REQUEST}) => {
+
     const resp = new AppResponse({ data: {}, message, errors });
     return response.status(code).send(resp);
 }

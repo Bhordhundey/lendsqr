@@ -1,7 +1,7 @@
 export interface IWallet {
     walletRef?: string;
     availableBalance?: number;
-    ledgerBalance?: string;
+    ledgerBalance?: number;
     isActive?: string;
     userId: number;
 }
@@ -10,14 +10,20 @@ export interface WalletModel {
     id?: number;
     wallet_ref?: string;
     available_balance?: number;
-    ledger_balance?: string;
+    ledger_balance?: number;
     is_active?: string;
     email: string;
     user_id: number;
 }
 
 export interface IFundWalletModel {
-    userId: number;
+    walletRef: string;
     amount: number;
+}
+
+export interface IWalletTransferModel {
+    recipientWalletRef: string;
+    amount: number;
+    sourceAccountUserId: number
 }
   
