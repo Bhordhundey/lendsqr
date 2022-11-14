@@ -1,4 +1,5 @@
 import type { Knex } from "knex";
+import dbConfig from '../config';
 
 // Update with your config settings.
 
@@ -6,11 +7,11 @@ const config: { [key: string]: Knex.Config } = {
   development: {
     client: 'mysql',
     connection: {
-      host : '127.0.0.1',
-      port : 3306,
-      user : 'root',
-      password : 'adetunji262',
-      database : 'lendsqr_db'
+      host : dbConfig.database.host,
+      port : Number(dbConfig.database.port),
+      user : dbConfig.database.user,
+      password : dbConfig.database.password,
+      database : dbConfig.database.name
     },
     pool: {
       min: 2,
