@@ -1,5 +1,4 @@
-import { BadRequestError } from '../errors/bad-request-error';
-import { IFundWalletModel, IWallet, IWalletTransferModel, WalletModel } from '../models/dto/wallet';
+import { IFundWalletModel, IFundWithdrawalModel, IWallet, IWalletTransferModel, WalletModel } from '../models/dto/wallet';
 import db from '../config/db/db';
 
 class WalletService {
@@ -60,6 +59,58 @@ class WalletService {
         return {
           isSuccess: false,
           message: "Unable to fund wallet"
+        }
+      }
+      
+      return {
+        isSuccess: true,
+        message: "Request Successful",
+        wallet: walletResponse
+      }
+  }
+
+  async fundWithdrawal(data: IFundWithdrawalModel) {
+    const { userId, amount } = data;
+    const wallet =  await db<WalletModel>('wallet').select().from('wallet').where({user_id: userId}).first(); 
+    
+     if (!wallet) {
+      return {
+        isSuccess: false,
+        message: ("Account not found")
+       };
+     }
+
+     if (data.amount < 1) {
+      return {
+        isSuccess: false,
+        message: ("Amount must be greater than 0")
+       };
+     }
+
+     if (amount > wallet.available_balance) {
+      return {
+        isSuccess: false,
+        message: "Insufficient fund"
+      }
+    }
+
+    await db<WalletModel>('wallet')
+      .where({user_id: wallet.id })
+      .update({ 
+        available_balance: wallet.available_balance - amount,
+        ledger_balance: wallet.ledger_balance - amount
+      });
+
+      const walletResponse: WalletModel = await db<WalletModel>('wallet')
+      .select()
+      .from('wallet')
+      .where({id : wallet.id})
+      .first();
+
+      if (!walletResponse){
+        return {
+          isSuccess: false,
+          message: "Fund withrawal Failed"
         }
       }
       

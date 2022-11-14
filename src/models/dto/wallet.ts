@@ -21,6 +21,11 @@ export interface IFundWalletModel {
     amount: number;
 }
 
+export interface IFundWithdrawalModel {
+    userId: number;
+    amount: number;
+}
+
 export interface IWalletTransferModel {
     recipientWalletRef: string;
     amount: number;

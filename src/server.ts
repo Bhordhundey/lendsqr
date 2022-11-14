@@ -3,13 +3,13 @@ import "express-async-errors";
 import { json } from "body-parser";
 import * as dotenv from "dotenv";
 import cookieSession from "cookie-session";
-import { NotFoundError } from "./errors/not-found-error";
-import { errorHandler } from "./middldewares/error-handler";
 import userRoute from "./routes/user";
 import walletRoute from "./routes/wallet";
 import authRoute from "./routes/auth";
 
 import config from './config/config';
+import { sendError } from "./util/common";
+import { HttpStatusCode } from "./models/HttpStatusCode";
 
 dotenv.config();
 const app = express();
@@ -26,11 +26,9 @@ app.use("/api/user", userRoute);
 app.use("/api/wallet", walletRoute);
 app.use("/api/auth", authRoute);
 
-app.all("*", async (req, res) => {
-   throw new NotFoundError();
+app.all("*", async (request, response) => {
+   sendError({message: "Route Not Found", response, code: HttpStatusCode.NOT_FOUND })
 })
-
-app.use(errorHandler);
 
 
 const start = async () => {

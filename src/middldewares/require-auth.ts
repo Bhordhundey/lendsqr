@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import { sendError } from "../util/common";
 import authService from "../service/auth"
-import { DecodedTokenModel } from "src/models/dto/user";
+import { DecodedTokenModel } from "../models/dto/user";
+import { HttpStatusCode } from "../models/HttpStatusCode";
 
 declare global {
     namespace Express {
@@ -23,11 +24,11 @@ export const requireAuth = async (
             request.currentUser = decodedToken;
             return next();  
         }
-        return sendError({ response, message, code: 401  });
+        return sendError({ response, message, code: HttpStatusCode.UNAUTHORIZED  });
 
     } 
     catch (error) {
     const { message } = error;
-    return sendError({ response, message, code: 401  });
+    return sendError({ response, message, code: HttpStatusCode.UNAUTHORIZED  });
     }
   };

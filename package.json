@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev src/server.ts",
-    "knex:migrate:make": "knex migrate:make -x ts --migrations-directory src/config/db/migrations",
-    "knex:migrate:latest": "knex migrate:latest --knexfile src/config/db/knexfile.ts",
-    "knex:migrate:rollback": "knex --knexfile migrate:rollback --migrations-directory src/config/db/migrations"
+    "dev": "ts-node-dev ./src/server.ts",
+    "build": "tsc",
+    "start": "NODE_ENV=default node ./dist/src/server.js",
+    "knex:migrate:make": "knex migrate:make -x ts --migrations-directory ./src/config/db/migrations",
+    "knex:migrate:latest": "knex migrate:latest --knexfile ./src/config/db/knexfile.ts",
+    "knex:migrate:rollback": "knex --knexfile migrate:rollback --migrations-directory ./src/config/db/migrations"
   },
   "keywords": [],
   "author": "",

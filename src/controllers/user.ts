@@ -1,21 +1,21 @@
 import { Request, Response } from "express";
 import { IUser } from "../models/dto/user";
 import { sendError, sendSuccess } from "../util/common";
-import { BadRequestError } from "../errors/bad-request-error";
 import userService from "../service/user";
+import validate from "../util/validations/validator";
+import { accountSchemas } from "../util/validations/validationSchemas/account.schema";
 
 export const createAccount = async (request: Request, response: Response) => {
+   // Validate the request
+   const { errors, data } = validate(accountSchemas.createUserSchema, request.body);
 
-  const { firstName, lastName, email } = request.body;
-
-  const payload: IUser = {
-    firstName,
-    lastName,
-    email,
-  };
+     // Return error if the validation fails
+     if (errors) {
+      return sendError({ response, errors });
+    }
 
   const { isSuccess, message, user, wallet } = await userService.createUser(
-    payload
+    data
   );
 
   if (isSuccess) {
