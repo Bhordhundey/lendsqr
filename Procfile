@@ -1,1 +1,2 @@
-web: npm run migrate:rollback && npm run migrate:latest && npm run build && node ./dist/src/server.js
+web: knex --knexfile migrate:rollback --migrations-directory ./src/config/db/migrations && 
+knex migrate:latest --knexfile ./src/config/db/knexfile.ts && tsc && node ./dist/src/server.js
