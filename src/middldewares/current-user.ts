@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import { DecodedTokenModel, UserModel } from "src/models/dto/user";
-import { sendError } from "src/util/common";
+import { DecodedTokenModel, UserModel } from "../models/dto/user";
+import { sendError } from "../util/common";
 
 
 

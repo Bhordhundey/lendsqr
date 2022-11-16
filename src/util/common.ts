@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import cryptoRandomString from "crypto-random-string";import AppResponse from "../models/AppResponse";
-import { HttpStatusCode } from "../models/HttpStatusCode";
+import  HttpStatusCode  from "../models/HttpStatusCode";
  "crypto-random-string";
 
 export const generateUUID = () => {

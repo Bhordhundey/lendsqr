@@ -1,4 +1,4 @@
-export const HttpStatusCode = {
+const HttpStatusCode = {
     SERVER_ERROR: 500,
     NOT_FOUND: 404,
     UNAUTHORIZED: 401,
@@ -6,3 +6,5 @@ export const HttpStatusCode = {
     INVALID_REQUEST: 400,
     SUCCESS: 200
 }
+
+export default HttpStatusCode;

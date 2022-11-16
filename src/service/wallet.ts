@@ -1,16 +1,14 @@
 import { IFundWalletModel, IFundWithdrawalModel, IWallet, IWalletTransferModel, WalletModel } from '../models/dto/wallet';
 import db from '../config/db/db';
 
-class WalletService {
-  async createWallet(data: IWallet) {
+  const createWallet = async (data: IWallet) => {
     const [id] = await db('wallet')
       .insert({
         wallet_ref: data.walletRef,
         user_id: data.userId
       })
-      
      const wallet: WalletModel = await db<WalletModel>('wallet').select().from('wallet').where({id}).first();
-
+ 
     if (!wallet) {
       return {
         isSuccess: false,
@@ -25,7 +23,7 @@ class WalletService {
     }
   }
 
-  async fundWallet(data: IFundWalletModel) {
+  const fundWallet = async (data: IFundWalletModel) => {
     const wallet =  await db<WalletModel>('wallet').select().from('wallet').where({wallet_ref: data.walletRef}).first(); 
     
      if (!wallet) {
@@ -69,7 +67,7 @@ class WalletService {
       }
   }
 
-  async fundWithdrawal(data: IFundWithdrawalModel) {
+  const fundWithdrawal = async (data: IFundWithdrawalModel) => {
     const { userId, amount } = data;
     const wallet =  await db<WalletModel>('wallet').select().from('wallet').where({user_id: userId}).first(); 
     
@@ -121,7 +119,7 @@ class WalletService {
       }
   }
 
-  async fundTransfer(data: IWalletTransferModel) {
+  const fundTransfer = async (data: IWalletTransferModel) => {
     const {sourceAccountUserId, amount, recipientWalletRef} = data
 
     const sourceAccountWallet: WalletModel = await db<WalletModel>('wallet').select().from('wallet').where({user_id: sourceAccountUserId}).first();
@@ -176,7 +174,7 @@ class WalletService {
 
   }
 
-  async getWalletDetails(userId: number) {
+  const getWalletDetails = async (userId: number) => {
     const wallet = await db<WalletModel>('wallet').select().from('wallet').where({user_id: userId}).first().join('user', 'user.id', 'wallet.user_id')
     .options({nestTables: true});
    
@@ -204,6 +202,5 @@ class WalletService {
       }
     }
   }
-}
 
-export default new WalletService();
+export default { createWallet, fundWallet, fundTransfer, fundWithdrawal, getWalletDetails}

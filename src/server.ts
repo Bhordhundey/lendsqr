@@ -9,7 +9,7 @@ import authRoute from "./routes/auth";
 
 import config from './config/config';
 import { sendError } from "./util/common";
-import { HttpStatusCode } from "./models/HttpStatusCode";
+import HttpStatusCode from "./models/HttpStatusCode";
 
 dotenv.config();
 const app = express();

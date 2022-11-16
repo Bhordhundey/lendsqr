@@ -4,8 +4,7 @@ import { IUser, UserModel } from '../models/dto/user';
 import db from '../config/db/db';
 import walletService from '../service/wallet';
 
-class UserService {
-  async createUser(data: IUser) {
+  const createUser = async (data: IUser): Promise<{ isSuccess: boolean; user?: any; wallet?: any, message?: string }> => {
     const isEmailExist: UserModel = await db<UserModel>('user')
       .select()
       .where({email: data.email})
@@ -24,12 +23,11 @@ class UserService {
       first_name: data.firstName,
       last_name: data.lastName,
     })
-     
+
    const user: UserModel = await db<UserModel>('user')
       .select()
       .where({id})
       .first();
-
 
     if (!user) {
       return { isSuccess: false, message: "Unable to create user details, try again"}
@@ -40,9 +38,9 @@ class UserService {
       userId: user.id
     }
 
-    const {wallet} = await walletService.createWallet(walletPayload);
+    const {isSuccess, wallet} = await walletService.createWallet(walletPayload);
 
-    if (!wallet) {
+    if (!isSuccess) {
       return { isSuccess: false, message: "Unable to create wallet details, try again"}
     }
     
@@ -53,6 +51,6 @@ class UserService {
       wallet
     }
   }
-}
 
-export default new UserService();
+
+export default {createUser};

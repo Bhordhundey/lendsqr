@@ -3,7 +3,7 @@ import {
   IFundWalletModel,
   IFundWithdrawalModel,
   IWalletTransferModel,
-} from "src/models/dto/wallet";
+} from "../models/dto/wallet";
 import { sendError, sendSuccess } from "../util/common";
 import walletService from "../service/wallet";
 import validate from "../util/validations/validator";

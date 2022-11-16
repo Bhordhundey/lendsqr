@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { sendError } from "../util/common";
 import authService from "../service/auth"
 import { DecodedTokenModel } from "../models/dto/user";
-import { HttpStatusCode } from "../models/HttpStatusCode";
+import HttpStatusCode from "../models/HttpStatusCode";
 
 declare global {
     namespace Express {

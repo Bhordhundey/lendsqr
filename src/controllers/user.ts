@@ -1,11 +1,9 @@
-import { Request, Response } from "express";
-import { IUser } from "../models/dto/user";
 import { sendError, sendSuccess } from "../util/common";
 import userService from "../service/user";
 import validate from "../util/validations/validator";
 import { accountSchemas } from "../util/validations/validationSchemas/account.schema";
 
-export const createAccount = async (request: Request, response: Response) => {
+const createAccount = async (request, response) => {
    // Validate the request
    const { errors, data } = validate(accountSchemas.createUserSchema, request.body);
 
@@ -42,3 +40,6 @@ export const createAccount = async (request: Request, response: Response) => {
 
   return sendError({ response, message });
 };
+
+
+export default {createAccount};
