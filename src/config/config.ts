@@ -2,8 +2,9 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 
-const config = {
+const appConfig = {
     serverPort: process.env.SERVER_PORT,
+    environment: process.env.NODE_ENV,
     jwt: {
         secret: process.env.JWT_SECRET,
         expires: process.env.JWT_EXPIRE
@@ -18,4 +19,4 @@ const config = {
    }
 }
 
-export default config
+export default appConfig
