@@ -40,13 +40,10 @@ export const fundWallet = async (request: Request, response: Response) => {
 
 export const fundWithdrawal = async (request: Request, response: Response) => {
   try {
-    // Validate the request
     const { errors, data } = validate(
       accountSchemas.fundWithdrawalSchema,
       request.body
     );
-
-    // Return error if the validation fails
     if (errors) {
       return sendError({ response, errors });
     }
