@@ -1,0 +1,1 @@
+web: npm run migrate:rollback && npm run migrate:latest && npm run build && node ./dist/src/server.js

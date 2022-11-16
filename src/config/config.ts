@@ -13,7 +13,8 @@ const config = {
         user: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
         name: process.env.DB_NAME,
-        host: process.env.DB_HOST
+        host: process.env.DB_HOST,
+        databaseUrl: process.env.JAWSDB_URL
    }
 }
 

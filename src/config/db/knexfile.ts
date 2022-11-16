@@ -3,16 +3,37 @@ import dbConfig from '../config';
 
 // Update with your config settings.
 
-const config: { [key: string]: Knex.Config } = {
+// const config: { [key: string]: Knex.Config } = {
+//   development: {
+//     client: 'mysql',
+//     connection: {
+//       host : dbConfig.database.host,
+//       port : Number(dbConfig.database.port),
+//       user : dbConfig.database.user,
+//       password : dbConfig.database.password,
+//       database : dbConfig.database.name
+//     },
+//     pool: {
+//       min: 2,
+//       max: 10
+//     },
+//     migrations: {
+//       tableName: "knex_migrations"
+//     }
+//   }
+
+// };
+
+const config: { [key: string]: Knex.Config } =  {
   development: {
     client: 'mysql',
-    connection: {
+    connection: dbConfig.database.databaseUrl == "development" ? {
       host : dbConfig.database.host,
       port : Number(dbConfig.database.port),
       user : dbConfig.database.user,
       password : dbConfig.database.password,
       database : dbConfig.database.name
-    },
+    } : dbConfig.database.databaseUrl,
     pool: {
       min: 2,
       max: 10
@@ -21,8 +42,7 @@ const config: { [key: string]: Knex.Config } = {
       tableName: "knex_migrations"
     }
   }
-
-};
+} 
 
 export default config;
 

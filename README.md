@@ -78,7 +78,7 @@ $ npm run knex:migrate:latest
 
 ## Test Lendsqr API
 
-To test Lendsqr Api, both a Postman collection and environment are available in postman workspace that will be shared
+To test Lendsqr Api, both a Postman collection and environment are available in https://documenter.getpostman.com/view/3701162/2s8YmKSQ6F
 
 ## Debug on Visual Studio Code
 
