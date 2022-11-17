@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "ts-node-dev ./src/server.ts",
     "build": "tsc",
-    "start": "npm run build && node ./dist/src/server.js",
+    "postinstall": "npm run build",
+    "start": "node ./dist/src/server.js",
     "test": " NODE_ENV=test nyc  --reporter text   ts-mocha './src/tests/**/*.spec.ts' --exit",
     "test:watch": "npm run test -- --watchAll",
     "knex:migrate:make": "knex migrate:make -x ts --migrations-directory ./src/config/db/migrations",
