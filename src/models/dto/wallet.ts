@@ -17,7 +17,7 @@ export interface WalletModel {
 }
 
 export interface IFundWalletModel {
-    walletRef: string;
+    userId: number
     amount: number;
 }
 
