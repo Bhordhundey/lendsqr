@@ -18,7 +18,12 @@ export const fundWallet = async (request: Request, response: Response) => {
     if (errors) {
       return sendError({ response, errors });
     }
-    const { isSuccess, message, wallet } = await walletService.fundWallet(data);
+    const payload = {
+      amount: data.amount,
+      userId: request.currentUser.userId
+    }
+
+    const { isSuccess, message, wallet } = await walletService.fundWallet(payload);
     if (isSuccess) {
       return sendSuccess({
         response,

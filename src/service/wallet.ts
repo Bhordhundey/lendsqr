@@ -24,7 +24,7 @@ import db from '../config/db/db';
   }
 
   const fundWallet = async (data: IFundWalletModel) => {
-    const wallet =  await db<WalletModel>('wallet').select().from('wallet').where({wallet_ref: data.walletRef}).first(); 
+    const wallet =  await db<WalletModel>('wallet').select().from('wallet').where({user_id: data.userId}).first(); 
     
      if (!wallet) {
       return {

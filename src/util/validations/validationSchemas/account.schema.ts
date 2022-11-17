@@ -33,11 +33,6 @@ getTokenSchema: Joi.object().keys({
 }),
 
   fundWalletSchema: Joi.object().keys({
-    walletRef: Joi.string()
-      .trim(true)
-      .required()
-      .regex(/^[A-Za-z]/)
-      .label('Wallet ref'),
     amount: Joi.number()
       .required()
       .label('Amount'),
