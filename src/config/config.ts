@@ -3,8 +3,7 @@ dotenv.config();
 
 
 const appConfig = {
-    serverPort: process.env.SERVER_PORT,
-    serverHost: process.env.SERVER_HOST,
+    serverPort: process.env.PORT,
     environment: process.env.NODE_ENV,
     jwt: {
         secret: process.env.JWT_SECRET,
