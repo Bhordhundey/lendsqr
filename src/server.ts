@@ -32,16 +32,11 @@ app.all("*", async (request, response) => {
 
 
 const start = async () => {
-    // const PORT = config.serverPort || 5000;
-    const server_port = Number(config.serverPort) || Number(config.serverPort)  || 80;
-    const server_host = config.serverHost || '0.0.0.0';
+    const PORT = process.env.SERVER_PORT || 4000;
 
-    console.log("==server_host===", server_host);
-    
-
-    app.listen(server_port, server_host, function() {
-        console.log('Listening on port %d', server_port);
-    });
+    app.listen(PORT, () => {
+        console.log(`===Server Connected on port ${PORT}===`); 
+    })
 }
 
 start();
