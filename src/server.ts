@@ -36,6 +36,9 @@ const start = async () => {
     const server_port = Number(config.serverPort) || Number(config.serverPort)  || 80;
     const server_host = config.serverHost || '0.0.0.0';
 
+    console.log("==server_host===", server_host);
+    
+
     app.listen(server_port, server_host, function() {
         console.log('Listening on port %d', server_port);
     });

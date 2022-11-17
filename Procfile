@@ -1,1 +1,1 @@
-web: node -r dotenv/config ./node_modules/knex/bin/cli.js migrate:rollback --knexfile ./src/config/db/knexfile.ts && node -r dotenv/config ./node_modules/knex/bin/cli.js migrate:latest --knexfile ./src/config/db/knexfile.ts && tsc && node ./dist/src/server.js
+web: npm start
