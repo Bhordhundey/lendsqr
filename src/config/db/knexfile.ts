@@ -1,17 +1,16 @@
 import type { Knex } from "knex";
-import dbConfig from '../config';
+import appConfig from '../config';
+require('dotenv').config();
 
-// Update with your config settings.
-
-const config: { [key: string]: Knex.Config } = {
+const config: { [key: string]: Knex.Config } =  {
   development: {
     client: 'mysql',
-    connection: {
-      host : dbConfig.database.host,
-      port : Number(dbConfig.database.port),
-      user : dbConfig.database.user,
-      password : dbConfig.database.password,
-      database : dbConfig.database.name
+    connection:  {
+      host : appConfig.database.host,
+      port : Number(appConfig.database.port),
+      user : appConfig.database.user,
+      password : appConfig.database.password,
+      database : appConfig.database.name
     },
     pool: {
       min: 2,
@@ -20,11 +19,20 @@ const config: { [key: string]: Knex.Config } = {
     migrations: {
       tableName: "knex_migrations"
     }
+  },
+  production: {
+    client: 'mysql',
+    connection: appConfig.database.databaseUrl,
+    pool: {
+      min: 2,
+      max: 10
+    },
+    migrations: {
+      tableName: "knex_migrations"
+    }
   }
+} 
 
-};
 
 export default config;
 
-
-// npx knex migrate:make init --migrations-directory db/migrations

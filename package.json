@@ -6,12 +6,14 @@
   "scripts": {
     "dev": "ts-node-dev ./src/server.ts",
     "build": "tsc",
-    "start": "NODE_ENV=default node ./dist/src/server.js",
+    "start": "npm run build && node ./dist/src/server.js",
     "test": " NODE_ENV=test nyc  --reporter text   ts-mocha './src/tests/**/*.spec.ts' --exit",
     "test:watch": "npm run test -- --watchAll",
     "knex:migrate:make": "knex migrate:make -x ts --migrations-directory ./src/config/db/migrations",
-    "knex:migrate:latest": "knex migrate:latest --knexfile ./src/config/db/knexfile.ts",
-    "knex:migrate:rollback": "knex --knexfile migrate:rollback --migrations-directory ./src/config/db/migrations"
+    "knex:migrate:latest": "node -r dotenv/config ./node_modules/knex/bin/cli.js migrate:latest --knexfile ./src/config/db/knexfile.ts" ,
+    "knex:migrate:rollback": "node -r dotenv/config ./node_modules/knex/bin/cli.js migrate:rollback --knexfile ./src/config/db/knexfile.ts",
+    "heroku-prebuild": "export NPM_CONFIG_PRODUCTION=false; export NODE_ENV=; NPM_CONFIG_PRODUCTION=false NODE_ENV=development npm install --only=dev --dev",
+    "heroku-postbuild": "export NPM_CONFIG_PRODUCTION=true; export NODE_ENV=production;"
   },
   "keywords": [],
   "author": "",

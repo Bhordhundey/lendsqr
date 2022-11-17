@@ -130,6 +130,13 @@ import db from '../config/db/db';
         message: "Insufficient fund"
       }
     }
+
+    if (sourceAccountWallet.wallet_ref == recipientWalletRef) {
+      return {
+        isSuccess: false,
+        message: "You can't transfer from a wallet to the same wallet"
+      }
+    }
     
     const recipientWallet: WalletModel = await db<WalletModel>('wallet').select().from('wallet').where({wallet_ref: recipientWalletRef}).first();
     if (!recipientWallet) {
