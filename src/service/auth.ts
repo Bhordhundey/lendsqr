@@ -6,6 +6,7 @@ import db from "../config/db/db";
 
 class AuthService {
   async generateToken(email: string) {
+    
     const user: UserModel = await db<UserModel>("user")
       .select()
       .where({ email })
@@ -22,7 +23,11 @@ class AuthService {
       config.jwt.secret,
       { expiresIn: config.jwt.expires }
     );
-    return token;
+    
+    return {
+      isSuccess: true,
+      token
+    };
   }
 
   async decodeToken(token: string) {
@@ -55,6 +60,18 @@ class AuthService {
     }
 
     const decodedToken = await this.decodeToken(token);
+
+    const user: UserModel = await db<UserModel>('user')
+      .select()
+      .where({email: decodedToken.email})
+      .first();
+
+    if (!user) {
+      return {
+        isSuccess: false,
+        message: "Unauthorized User"
+      }
+    }
 
     if (decodedToken) {
       return {

@@ -25,6 +25,13 @@ const accountSchemas = {
   }),
 }),
 
+getTokenSchema: Joi.object().keys({
+  email: Joi.string().required().email().trim().label('Email').messages({
+  'string.email': 'Invalid email',
+  'any.required': 'Email is required',
+}),
+}),
+
   fundWalletSchema: Joi.object().keys({
     walletRef: Joi.string()
       .trim(true)
