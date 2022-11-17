@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "ts-node-dev ./src/server.ts",
     "build": "tsc",
-    "postinstall": "npm run build",
     "start": "node ./dist/src/server.js",
     "test": " NODE_ENV=test nyc  --reporter text   ts-mocha './src/tests/**/*.spec.ts' --exit",
     "test:watch": "npm run test -- --watchAll",
